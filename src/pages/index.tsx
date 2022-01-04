@@ -1,13 +1,21 @@
-import type { NextPage } from 'next'
+import { ReactElement } from 'react'
+import { Typography } from '@mui/material'
 
-const IndexPage: NextPage = () => {
+import { NextPageWithLayout } from '@/pages/_app'
+import ThemeSwitcherButton from '@/react/components/theme-switcher/ThemeSwitcherButton'
+import SiteLayout from '@/react/components/layouts/SiteLayout'
 
+const IndexPage: NextPageWithLayout = () => {
   return (
     <div>
-      <h1>Welcome to my website</h1>
-      <p>Estamos en la página principal</p>
+      <Typography variant='h1'>Demo home</Typography>
+      <ThemeSwitcherButton />
     </div>
   )
 }
-
+IndexPage.getLayout = (page: ReactElement) => (
+  <SiteLayout>
+    {page}
+  </SiteLayout>
+)
 export default IndexPage

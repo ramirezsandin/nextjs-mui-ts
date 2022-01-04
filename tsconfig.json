@@ -8,6 +8,9 @@
       "@/api/*": [
         "pages/api/*"
       ],
+      "@/pages/*": [
+        "pages/*"
+      ],
       "@/react/*": [
         "react/*"
       ],

@@ -5,23 +5,27 @@ import lightTheme from '@/themes/light'
 import darkTheme from '@/themes/dark'
 
 interface ThemeContextType {
-    setDarkTheme: () => void
-    setLightTheme: () => void
+    currentTheme: Theme
+    toggleTheme: () => void
 }
 const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType)
 const useThemeContext = () => useContext(ThemeContext)
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [currentTheme, setCurrentTheme] = useState<Theme>(lightTheme)
-    const setLightTheme = () => {
-        setCurrentTheme(lightTheme)
-    }
-    const setDarkTheme = () => {
-        setCurrentTheme(darkTheme)
-        lightTheme
+    const toggleTheme = () => {
+        switch (currentTheme.palette.mode) {
+            case 'light':
+                setCurrentTheme(darkTheme)
+                break
+            case 'dark':
+                setCurrentTheme(lightTheme)
+                break
+            default:
+        }
     }
     return (
-        <ThemeContext.Provider value={{ setLightTheme, setDarkTheme }}>
+        <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
             <MuiThemeProvider theme={currentTheme}>
                 {children}
             </MuiThemeProvider>
