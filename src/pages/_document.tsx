@@ -8,7 +8,7 @@ import darkTheme from '@/themes/dark'
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html lang="en">
+            <Html>
                 <Head>
                     {/* PWA primary color */}
                     <meta name="theme-color" media="(prefers-color-scheme: light)" content={lightTheme.palette.primary.main} />
