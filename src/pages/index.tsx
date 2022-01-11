@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { Box, Stack, Typography } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 
 import { NextPageWithLayout } from '@/pages/_app'
 import SiteLayout from '@/react/components/layouts/SiteLayout'
