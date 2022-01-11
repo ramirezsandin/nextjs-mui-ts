@@ -1,12 +1,25 @@
 import { FC } from 'react'
-import { AppBar, Container, Toolbar } from '@mui/material'
+import Link from 'next/link'
+import { AppBar, Container, IconButton, Toolbar } from '@mui/material'
+import { Home } from '@mui/icons-material'
+
+import ThemeSwitcherButton from '@/react/components/theme-switcher/ThemeSwitcherButton'
 
 const SiteLayout: FC = ({ children }) => {
     return (
         <>
             <AppBar position='static'>
-                <Toolbar>
-                    Menu
+                <Toolbar
+                    sx={{
+                        justifyContent: 'space-between'
+                    }}
+                >
+                    <Link href='/' passHref>
+                        <IconButton color='inherit'>
+                            <Home />
+                        </IconButton>
+                    </Link>
+                    <ThemeSwitcherButton color='inherit' />
                 </Toolbar>
             </AppBar>
             <Container>

@@ -1,16 +1,32 @@
 import { ReactElement } from 'react'
-import { Typography } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 
 import { NextPageWithLayout } from '@/pages/_app'
-import ThemeSwitcherButton from '@/react/components/theme-switcher/ThemeSwitcherButton'
 import SiteLayout from '@/react/components/layouts/SiteLayout'
 
 const IndexPage: NextPageWithLayout = () => {
   return (
-    <div>
-      <Typography variant='h1'>Demo home</Typography>
-      <ThemeSwitcherButton />
-    </div>
+    <Stack
+      spacing={2}
+    >
+      <Typography variant='h1' textAlign='center'>
+        Next.js + Material UI + Typescript example
+      </Typography>
+
+      <Typography variant='h2'>
+        Introduction
+      </Typography>
+      <Typography paragraph>
+        This example consist of a starting point to a project to use
+        Next.js, Material UI, and Typescript.
+      </Typography>
+      <Typography variant='h2'>
+        Features
+      </Typography>
+      <Typography paragraph>
+        Static Layout, Theme Switcher functionality (Light and Dark), persistent state for the theme selection.
+      </Typography>
+    </Stack>
   )
 }
 IndexPage.getLayout = (page: ReactElement) => (
