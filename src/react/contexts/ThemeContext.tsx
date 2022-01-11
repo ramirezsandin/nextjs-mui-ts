@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { Theme, ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
+import { createContext, ReactNode, useContext } from 'react'
+import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
 import lightTheme from '@/themes/light'
 import darkTheme from '@/themes/dark'
@@ -14,10 +14,11 @@ interface ThemeContextType {
 }
 const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType)
 const useThemeContext = () => useContext(ThemeContext)
+
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const isDarkOS = useMediaQuery(DARK_SCHEME_QUERY)
+
     const [themeMode, setThemeMode] = useLocalStorage<ThemeMode>('themeMode', isDarkOS ? 'light' : 'dark')
-    //const [themeMode, setThemeMode] = useState<ThemeMode>(isDarkOS ? 'light' : 'dark')
 
     const toggleTheme = () => {
         switch (themeMode) {
