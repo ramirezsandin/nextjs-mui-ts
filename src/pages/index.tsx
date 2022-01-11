@@ -7,6 +7,7 @@ import SiteLayout from '@/react/components/layouts/SiteLayout'
 const IndexPage: NextPageWithLayout = () => {
   return (
     <Stack
+      py={2}
       spacing={2}
     >
       <Typography variant='h1' textAlign='center'>
