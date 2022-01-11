@@ -1,17 +1,19 @@
 import { useThemeContext } from '@/react/contexts/ThemeContext'
-import { DarkMode, LightMode } from '@mui/icons-material'
-import { IconButton, Tooltip } from '@mui/material'
+import { DarkModeOutlined, LightModeRounded } from '@mui/icons-material'
+import { IconButton, IconButtonProps, Tooltip } from '@mui/material'
 
-const ThemeSwitcherButton = () => {
-    const { currentTheme, toggleTheme } = useThemeContext()
+interface ThemeSwitcherButtonProps extends IconButtonProps { }
+const ThemeSwitcherButton = ({ ...rest }: ThemeSwitcherButtonProps) => {
+    const { themeMode, toggleTheme } = useThemeContext()
     return (
         <Tooltip
-            title={currentTheme.palette.mode === 'light' ? `Switch to dark mode` : `Switch to light mode`}
+            title={themeMode === 'light' ? `Switch to dark mode` : `Switch to light mode`}
         >
             <IconButton
+                {...rest}
                 onClick={toggleTheme}
             >
-                {currentTheme.palette.mode === 'light' ? <DarkMode /> : <LightMode />}
+                {themeMode === 'light' ? <DarkModeOutlined /> : <LightModeRounded />}
             </IconButton>
         </Tooltip>
     )

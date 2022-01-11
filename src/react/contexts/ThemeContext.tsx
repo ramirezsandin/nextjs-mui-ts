@@ -1,32 +1,39 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
-import { Theme, ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { Theme, ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
 import lightTheme from '@/themes/light'
 import darkTheme from '@/themes/dark'
+import useLocalStorage from '@/react/hooks/useLocalStorage'
 
+const DARK_SCHEME_QUERY = '(prefers-color-scheme: dark)'
+
+type ThemeMode = 'light' | 'dark'
 interface ThemeContextType {
-    currentTheme: Theme
+    themeMode: ThemeMode
     toggleTheme: () => void
 }
 const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType)
 const useThemeContext = () => useContext(ThemeContext)
-
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [currentTheme, setCurrentTheme] = useState<Theme>(lightTheme)
+    const isDarkOS = useMediaQuery(DARK_SCHEME_QUERY)
+    const [themeMode, setThemeMode] = useLocalStorage<ThemeMode>('themeMode', isDarkOS ? 'light' : 'dark')
+    //const [themeMode, setThemeMode] = useState<ThemeMode>(isDarkOS ? 'light' : 'dark')
+
     const toggleTheme = () => {
-        switch (currentTheme.palette.mode) {
+        switch (themeMode) {
             case 'light':
-                setCurrentTheme(darkTheme)
+                setThemeMode('dark')
                 break
             case 'dark':
-                setCurrentTheme(lightTheme)
+                setThemeMode('light')
                 break
             default:
         }
     }
+
     return (
-        <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
-            <MuiThemeProvider theme={currentTheme}>
+        <ThemeContext.Provider value={{ themeMode, toggleTheme }}>
+            <MuiThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
                 {children}
             </MuiThemeProvider>
         </ThemeContext.Provider>

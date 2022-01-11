@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { AppBar, Toolbar } from '@mui/material'
+import { AppBar, Container, Toolbar } from '@mui/material'
 
 const SiteLayout: FC = ({ children }) => {
     return (
@@ -9,10 +9,12 @@ const SiteLayout: FC = ({ children }) => {
                     Menu
                 </Toolbar>
             </AppBar>
-            {children}
-            <footer>
+            <Container>
+                {children}
+            </Container>
+            <Container component='footer'>
 
-            </footer>
+            </Container>
         </>
     )
 }
