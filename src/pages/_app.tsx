@@ -12,7 +12,6 @@ import { ThemeProvider } from '@/react/contexts/ThemeContext'
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 
-
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
 }
