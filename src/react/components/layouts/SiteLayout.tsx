@@ -4,6 +4,7 @@ import { AppBar, Container, IconButton, Toolbar } from '@mui/material'
 import { Home } from '@mui/icons-material'
 
 import ThemeSwitcherButton from '@/react/components/theme-switcher/ThemeSwitcherButton'
+import AlertContainer from '@/react/components/alerts/AlertContainer'
 
 const SiteLayout: FC = ({ children }) => {
     return (
@@ -28,6 +29,7 @@ const SiteLayout: FC = ({ children }) => {
             <Container component='footer'>
 
             </Container>
+            <AlertContainer />
         </>
     )
 }

@@ -3,6 +3,7 @@ import { Stack, Typography } from '@mui/material'
 
 import { NextPageWithLayout } from '@/pages/_app'
 import SiteLayout from '@/react/components/layouts/SiteLayout'
+import AlertSender from '@/react/components/alerts/AlertSender'
 
 const IndexPage: NextPageWithLayout = () => {
   return (
@@ -24,9 +25,18 @@ const IndexPage: NextPageWithLayout = () => {
       <Typography variant='h2'>
         Features
       </Typography>
-      <Typography paragraph>
-        Static Layout, Theme Switcher functionality (Light and Dark), persistent state for the theme selection.
+      <Typography>
+        <ul>
+          <li>Static Layout</li>
+          <li>Theme Switcher functionality (Light and Dark)</li>
+          <li>Persistence of the theme selection on local storage</li>
+          <li>Global alert system with Mui Snackbar</li>
+        </ul>
       </Typography>
+      <Typography variant='h2'>
+        Alert Demo
+      </Typography>
+      <AlertSender />
     </Stack>
   )
 }
