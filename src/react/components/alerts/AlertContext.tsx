@@ -49,6 +49,7 @@ AlertCallerProvider.displayName = 'AlertUpdateProvider'
 // Alert State Context Type
 interface AlertStateContextType {
     state: AlertState | undefined
+    clearState: () => void
 }
 
 // Alert State Context
@@ -65,7 +66,7 @@ const AlertProvider = ({ children }: AlertProviderProps) => {
     const [state, setState] = useState<AlertState | undefined>(undefined)
     return (
         <AlertStateContext.Provider
-            value={{ state }}
+            value={{ state, clearState: () => setState(undefined) }}
         >
             <AlertCallerProvider setState={setState} >
                 {children}

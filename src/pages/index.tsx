@@ -25,14 +25,12 @@ const IndexPage: NextPageWithLayout = () => {
       <Typography variant='h2'>
         Features
       </Typography>
-      <Typography>
-        <ul>
-          <li>Static Layout</li>
-          <li>Theme Switcher functionality (Light and Dark)</li>
-          <li>Persistence of the theme selection on local storage</li>
-          <li>Global alert system with Mui Snackbar</li>
-        </ul>
-      </Typography>
+      <ul>
+        <li>Static Layout</li>
+        <li>Theme Switcher functionality (Light and Dark)</li>
+        <li>Persistence of the theme selection on local storage</li>
+        <li>Global alert system with Mui Snackbar</li>
+      </ul>
       <Typography variant='h2'>
         Alert Demo
       </Typography>

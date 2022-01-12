@@ -13,7 +13,6 @@ export default class MyDocument extends Document {
                     {/* PWA primary color */}
                     <meta name="theme-color" media="(prefers-color-scheme: light)" content={lightTheme.palette.primary.main} />
                     <meta name="theme-color" media="(prefers-color-scheme: dark)" content={darkTheme.palette.primary.main} />
-                    <link rel="shortcut icon" href="/static/favicon.ico" />
                     <link
                         rel="stylesheet"
                         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
