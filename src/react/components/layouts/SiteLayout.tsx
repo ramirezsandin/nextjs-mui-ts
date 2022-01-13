@@ -23,7 +23,13 @@ const SiteLayout: FC = ({ children }) => {
                     <ThemeSwitcherButton color='inherit' />
                 </Toolbar>
             </AppBar>
-            <Container>
+            <Container
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: { xs: 'calc(100vh - 56px)', sm: 'calc(100vh - 64px)' },
+                }}
+            >
                 {children}
             </Container>
             <Container component='footer'>
