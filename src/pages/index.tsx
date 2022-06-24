@@ -1,30 +1,22 @@
 import { ReactElement } from 'react'
 import { Stack, Typography } from '@mui/material'
 
-import { NextPageWithLayout } from '@/pages/_app'
 import SiteLayout from '@/react/components/layouts/SiteLayout'
 import AlertSender from '@/react/components/alerts/AlertSender'
 
-const IndexPage: NextPageWithLayout = () => {
+const IndexPage = () => {
   return (
-    <Stack
-      py={2}
-      spacing={2}
-    >
-      <Typography variant='h1' textAlign='center'>
+    <Stack py={2} spacing={2}>
+      <Typography variant="h1" textAlign="center">
         Next.js + Material UI + Typescript example
       </Typography>
 
-      <Typography variant='h2'>
-        Introduction
-      </Typography>
+      <Typography variant="h2">Introduction</Typography>
       <Typography paragraph>
-        This example consist of a starting point to a project to use
-        Next.js, Material UI, and Typescript.
+        This example consist of a starting point to a project to use Next.js,
+        Material UI, and Typescript.
       </Typography>
-      <Typography variant='h2'>
-        Features
-      </Typography>
+      <Typography variant="h2">Features</Typography>
       <ul>
         <li>Static Layout</li>
         <li>Custom 404 page</li>
@@ -32,16 +24,10 @@ const IndexPage: NextPageWithLayout = () => {
         <li>Persistence of the theme selection on local storage</li>
         <li>Global alert system with Mui Snackbar</li>
       </ul>
-      <Typography variant='h2'>
-        Alert Demo
-      </Typography>
+      <Typography variant="h2">Alert Demo</Typography>
       <AlertSender />
     </Stack>
   )
 }
-IndexPage.getLayout = (page: ReactElement) => (
-  <SiteLayout>
-    {page}
-  </SiteLayout>
-)
+IndexPage.getLayout = (page: ReactElement) => <SiteLayout>{page}</SiteLayout>
 export default IndexPage
