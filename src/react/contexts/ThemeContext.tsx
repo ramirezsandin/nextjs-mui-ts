@@ -1,9 +1,14 @@
-import { createContext, ReactNode, useContext } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
 import lightTheme from '@/themes/light'
 import darkTheme from '@/themes/dark'
-import useLocalStorage from '@/react/hooks/useLocalStorage'
 
 type ThemeMode = 'light' | 'dark'
 
@@ -20,21 +25,30 @@ const useThemeContext = () => useContext(ThemeContext)
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const prefersDark = useMediaQuery(DARK_SCHEME_QUERY)
 
-  const [themeMode, setThemeMode] = useLocalStorage<ThemeMode>(
-    'themeMode',
+  const [themeMode, setThemeMode] = useState<ThemeMode>(
     prefersDark ? 'dark' : DEFAULT_MODE
   )
 
+  useEffect(() => {
+    const mode = localStorage.getItem('themeMode')
+    if (mode !== null && (mode === 'light' || mode === 'dark')) {
+      setThemeMode(mode)
+    }
+  }, [])
+
   const toggleTheme = () => {
+    let newThemeMode: ThemeMode = DEFAULT_MODE
     switch (themeMode) {
       case 'light':
-        setThemeMode('dark')
+        newThemeMode = 'dark'
         break
       case 'dark':
-        setThemeMode('light')
+        newThemeMode = 'light'
         break
       default:
     }
+    setThemeMode(newThemeMode)
+    localStorage.setItem('themeMode', newThemeMode)
   }
 
   return (
