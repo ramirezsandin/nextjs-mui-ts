@@ -26,9 +26,6 @@ interface ThemeProviderProps {
 const ThemeProvider = ({ children, initialValue }: ThemeProviderProps) => {
   const systemPrefersDark = useMediaQuery(DARK_SCHEME_QUERY)
 
-  // const [cookies, setCookie] = useCookies([THEME_MODE_COOKIE_NAME])
-  // const savedMode = cookies[THEME_MODE_COOKIE_NAME]
-
   const initialThemeMode: ThemeMode =
     initialValue === 'dark'
       ? initialValue
@@ -61,8 +58,6 @@ const ThemeProvider = ({ children, initialValue }: ThemeProviderProps) => {
     // Broadcast change to other tabs.
     postMessage(newThemeMode)
     // Update cookie.
-    //setCookie(THEME_MODE_COOKIE_NAME, newThemeMode)
-    //Cookies.set(THEME_MODE_COOKIE_NAME, newThemeMode)
     document.cookie = serialize(THEME_MODE_COOKIE_NAME, newThemeMode)
   }
 
