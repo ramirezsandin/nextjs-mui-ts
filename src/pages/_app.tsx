@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react'
-import type { AppProps } from 'next/app'
+import type { AppContext, AppProps } from 'next/app'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { CssBaseline } from '@mui/material'
@@ -9,6 +9,7 @@ import { EmotionCache } from '@emotion/cache'
 import createEmotionCache from '@/lib/material-ui'
 import { ThemeProvider } from '@/themes/ThemeContext'
 import { AlertProvider } from 'components/alerts/AlertContext'
+import App from 'next/app'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -40,4 +41,11 @@ export default function MyApp(props: MyAppProps) {
       </ThemeProvider>
     </CacheProvider>
   )
+}
+
+MyApp.getInitialProps = async (ctx: AppContext) => {
+  const pageProps = await App.getInitialProps(ctx)
+  return {
+    ...pageProps,
+  }
 }

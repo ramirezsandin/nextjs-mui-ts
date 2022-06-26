@@ -9,6 +9,7 @@ import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
 import lightTheme from '@/themes/light'
 import darkTheme from '@/themes/dark'
+import { useBroadcastChannel } from 'hooks/useBroadcastChannel'
 
 type ThemeMode = 'light' | 'dark'
 
@@ -29,12 +30,10 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     prefersDark ? 'dark' : DEFAULT_MODE
   )
 
-  useEffect(() => {
-    const mode = localStorage.getItem('themeMode')
-    if (mode !== null && (mode === 'light' || mode === 'dark')) {
-      setThemeMode(mode)
-    }
-  }, [])
+  const { postMessage } = useBroadcastChannel<ThemeMode>(
+    'theme-mode-updater',
+    setThemeMode
+  )
 
   const toggleTheme = () => {
     let newThemeMode: ThemeMode = DEFAULT_MODE
@@ -48,7 +47,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
       default:
     }
     setThemeMode(newThemeMode)
-    localStorage.setItem('themeMode', newThemeMode)
+    postMessage(newThemeMode)
   }
 
   return (
