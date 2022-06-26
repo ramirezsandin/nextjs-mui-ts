@@ -35,7 +35,6 @@ export default function MyApp(props: MyAppProps) {
   } = props
 
   const getLayout = Component.getLayout ?? ((page) => page)
-  console.log('myapp: ', cookies)
   return (
     <CacheProvider value={emotionCache}>
       <Head>
