@@ -1,6 +1,11 @@
-// edited from source: https://usehooks-ts.com/react-hook/use-local-storage
-// to support ssr in Next.js
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
+import { useEventCallback } from '@mui/material'
 
 import useEventListener from '@/react/hooks/useEventListener'
 
@@ -13,11 +18,14 @@ declare global {
 type SetValue<T> = Dispatch<SetStateAction<T>>
 
 function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
-  // Read local storage the parse stored json or return initialValue
-  const readStorage = (): T => {
+  // Get from local storage then
+  // parse stored json or return initialValue
+  const readValue = useCallback((): T => {
+    // Prevent build error "window is undefined" but keep keep working
     if (typeof window === 'undefined') {
       return initialValue
     }
+
     try {
       const item = window.localStorage.getItem(key)
       return item ? (parseJSON(item) as T) : initialValue
@@ -25,15 +33,22 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
       console.warn(`Error reading localStorage key “${key}”:`, error)
       return initialValue
     }
-  }
+  }, [initialValue, key])
 
-  // Persists the new value to localStorage.
-  const setStorage: SetValue<T> = (value) => {
+  // State to store our value
+  // Pass initial state function to useState so logic is only executed once
+  const [state, setState] = useState<T>(readValue)
+
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue: SetValue<T> = useEventCallback((value) => {
+    // Prevent build error "window is undefined" but keeps working
     if (typeof window == 'undefined') {
       console.warn(
         `Tried setting localStorage key “${key}” even though environment is not a client`
       )
     }
+
     try {
       // Allow value to be a function so we have the same API as useState
       const newValue = value instanceof Function ? value(state) : value
@@ -41,30 +56,30 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
       // Save to local storage
       window.localStorage.setItem(key, JSON.stringify(newValue))
 
+      // Save state
+      setState(newValue)
+
       // We dispatch a custom event so every useLocalStorage hook are notified
       window.dispatchEvent(new Event('local-storage'))
     } catch (error) {
       console.warn(`Error setting localStorage key “${key}”:`, error)
     }
-  }
+  })
 
-  // State to store the value
-  const [state, setState] = useState<T>(initialValue)
-
-  // Once the component is mounted, read from localStorage and update state.
   useEffect(() => {
-    setState(readStorage())
+    setState(readValue())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    setStorage(state)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state])
-
-  const handleStorageChange = () => {
-    setState(readStorage())
-  }
+  const handleStorageChange = useCallback(
+    (event: StorageEvent | CustomEvent) => {
+      if ((event as StorageEvent)?.key && (event as StorageEvent).key !== key) {
+        return
+      }
+      setState(readValue())
+    },
+    [key, readValue]
+  )
 
   // this only works for other documents, not the current one
   useEventListener('storage', handleStorageChange)
@@ -73,7 +88,7 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
   // See: useLocalStorage()
   useEventListener('local-storage', handleStorageChange)
 
-  return [state, setState]
+  return [state, setValue]
 }
 
 export default useLocalStorage
@@ -82,7 +97,7 @@ export default useLocalStorage
 function parseJSON<T>(value: string | null): T | undefined {
   try {
     return value === 'undefined' ? undefined : JSON.parse(value ?? '')
-  } catch (error) {
+  } catch {
     console.log('parsing error on', { value })
     return undefined
   }

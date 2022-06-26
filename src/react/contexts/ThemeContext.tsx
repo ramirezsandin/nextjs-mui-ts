@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
 import lightTheme from '@/themes/light'
@@ -18,6 +24,12 @@ const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType)
 const useThemeContext = () => useContext(ThemeContext)
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const prefersDark = useMediaQuery(DARK_SCHEME_QUERY)
 
   const [themeMode, setThemeMode] = useLocalStorage<ThemeMode>(
@@ -36,7 +48,9 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
       default:
     }
   }
-
+  if (!mounted) {
+    return children
+  }
   return (
     <ThemeContext.Provider value={{ themeMode, toggleTheme }}>
       <MuiThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
