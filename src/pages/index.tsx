@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
 import { Stack, Typography } from '@mui/material'
 
-import SiteLayout from '@/react/components/layouts/SiteLayout'
-import AlertSender from '@/react/components/alerts/AlertSender'
+import SiteLayout from 'components/layouts/SiteLayout'
+import AlertSender from 'components/alerts/AlertSender'
 
 const IndexPage = () => {
   return (

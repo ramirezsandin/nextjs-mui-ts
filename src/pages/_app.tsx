@@ -7,8 +7,8 @@ import { CacheProvider } from '@emotion/react'
 import { EmotionCache } from '@emotion/cache'
 
 import createEmotionCache from '@/lib/material-ui'
-import { ThemeProvider } from '@/react/contexts/ThemeContext'
-import { AlertProvider } from '@/react/components/alerts/AlertContext'
+import { ThemeProvider } from '@/themes/ThemeContext'
+import { AlertProvider } from 'components/alerts/AlertContext'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
