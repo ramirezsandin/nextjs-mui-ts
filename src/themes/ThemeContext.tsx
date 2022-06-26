@@ -35,8 +35,6 @@ const ThemeProvider = ({ children, initialValue }: ThemeProviderProps) => {
 
   const [themeMode, setThemeMode] = useState<ThemeMode>(initialThemeMode)
 
-  console.log('in theme: ', initialThemeMode)
-
   const { postMessage } = useBroadcastChannel<ThemeMode>(
     'theme-mode-updater',
     setThemeMode
