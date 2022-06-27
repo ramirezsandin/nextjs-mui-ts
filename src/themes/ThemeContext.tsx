@@ -12,7 +12,6 @@ import darkTheme from '@/themes/dark'
 import { useBroadcastChannel } from 'hooks/useBroadcastChannel'
 
 type ThemeMode = 'light' | 'dark'
-
 const DEFAULT_MODE: ThemeMode = 'light'
 const DARK_SCHEME_QUERY = '(prefers-color-scheme: dark)'
 const THEME_MODE_VAR_NAME = 'themeMode'
@@ -29,7 +28,6 @@ interface ThemeProviderProps {
 }
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const systemPrefersDark = useMediaQuery(DARK_SCHEME_QUERY)
-
   const [themeMode, setThemeMode] = useState<ThemeMode>(DEFAULT_MODE)
 
   const { postMessage } = useBroadcastChannel<ThemeMode>(
@@ -38,16 +36,7 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
   )
 
   const toggleTheme = () => {
-    let newThemeMode: ThemeMode = DEFAULT_MODE
-    switch (themeMode) {
-      case 'light':
-        newThemeMode = 'dark'
-        break
-      case 'dark':
-        newThemeMode = 'light'
-        break
-      default:
-    }
+    const newThemeMode: ThemeMode = themeMode === 'light' ? 'dark' : 'light'
     // Update state.
     setThemeMode(newThemeMode)
     // Broadcast change to other tabs.
