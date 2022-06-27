@@ -19,9 +19,6 @@ export type NextPageWithLayout = NextPage & {
 interface MyAppProps extends AppProps {
   Component: NextPageWithLayout
   emotionCache?: EmotionCache
-  cookies?: {
-    [key: string]: string
-  }
 }
 
 export default function MyApp(props: MyAppProps) {
