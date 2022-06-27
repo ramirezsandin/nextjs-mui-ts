@@ -27,7 +27,7 @@ const ThemeProvider = ({ children, initialValue }: ThemeProviderProps) => {
   const systemPrefersDark = useMediaQuery(DARK_SCHEME_QUERY)
 
   const initialThemeMode: ThemeMode =
-    initialValue === 'dark'
+    initialValue === 'dark' || initialValue === 'light'
       ? initialValue
       : systemPrefersDark
       ? 'dark'
