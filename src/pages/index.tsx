@@ -31,7 +31,3 @@ const IndexPage = () => {
 }
 IndexPage.getLayout = (page: ReactElement) => <SiteLayout>{page}</SiteLayout>
 export default IndexPage
-
-export function getStaticProps() {
-  return { props: {} }
-}
