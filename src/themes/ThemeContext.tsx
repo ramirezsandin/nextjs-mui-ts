@@ -30,9 +30,7 @@ interface ThemeProviderProps {
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const systemPrefersDark = useMediaQuery(DARK_SCHEME_QUERY)
 
-  const initialThemeMode: ThemeMode = systemPrefersDark ? 'dark' : DEFAULT_MODE
-
-  const [themeMode, setThemeMode] = useState<ThemeMode>(initialThemeMode)
+  const [themeMode, setThemeMode] = useState<ThemeMode>(DEFAULT_MODE)
 
   const { postMessage } = useBroadcastChannel<ThemeMode>(
     'theme-mode-updater',
@@ -62,8 +60,10 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
     const mode = localStorage.getItem(THEME_MODE_VAR_NAME)
     if (mode === 'dark' || mode === 'light') {
       setThemeMode(mode)
+    } else {
+      setThemeMode(systemPrefersDark ? 'dark' : DEFAULT_MODE)
     }
-  }, [])
+  }, [systemPrefersDark])
 
   return (
     <ThemeContext.Provider value={{ themeMode, toggleTheme }}>
