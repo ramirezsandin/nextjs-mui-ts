@@ -1,6 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
-import { serialize } from 'cookie'
 
 import lightTheme from '@/themes/light'
 import darkTheme from '@/themes/dark'
@@ -10,7 +15,7 @@ type ThemeMode = 'light' | 'dark'
 
 const DEFAULT_MODE: ThemeMode = 'light'
 const DARK_SCHEME_QUERY = '(prefers-color-scheme: dark)'
-const THEME_MODE_COOKIE_NAME = 'theme-mode'
+const THEME_MODE_VAR_NAME = 'themeMode'
 
 interface ThemeContextType {
   themeMode: ThemeMode
@@ -21,18 +26,11 @@ const useThemeContext = () => useContext(ThemeContext)
 
 interface ThemeProviderProps {
   children: ReactNode
-  initialValue?: string
 }
-const ThemeProvider = ({ children, initialValue }: ThemeProviderProps) => {
-  console.log('initial value : ', initialValue)
+const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const systemPrefersDark = useMediaQuery(DARK_SCHEME_QUERY)
 
-  const initialThemeMode: ThemeMode =
-    initialValue === 'dark' || initialValue === 'light'
-      ? initialValue
-      : systemPrefersDark
-      ? 'dark'
-      : DEFAULT_MODE
+  const initialThemeMode: ThemeMode = systemPrefersDark ? 'dark' : DEFAULT_MODE
 
   const [themeMode, setThemeMode] = useState<ThemeMode>(initialThemeMode)
 
@@ -56,9 +54,16 @@ const ThemeProvider = ({ children, initialValue }: ThemeProviderProps) => {
     setThemeMode(newThemeMode)
     // Broadcast change to other tabs.
     postMessage(newThemeMode)
-    // Update cookie.
-    document.cookie = serialize(THEME_MODE_COOKIE_NAME, newThemeMode)
+    // Update localStorage
+    localStorage.setItem(THEME_MODE_VAR_NAME, newThemeMode)
   }
+
+  useEffect(() => {
+    const mode = localStorage.getItem(THEME_MODE_VAR_NAME)
+    if (mode === 'dark' || mode === 'light') {
+      setThemeMode(mode)
+    }
+  }, [])
 
   return (
     <ThemeContext.Provider value={{ themeMode, toggleTheme }}>

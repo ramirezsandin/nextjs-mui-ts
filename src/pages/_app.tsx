@@ -1,6 +1,5 @@
 import { ReactElement, ReactNode } from 'react'
-import type { AppContext, AppProps } from 'next/app'
-import App from 'next/app'
+import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { CssBaseline } from '@mui/material'
@@ -10,7 +9,6 @@ import { EmotionCache } from '@emotion/cache'
 import createEmotionCache from '@/lib/material-ui'
 import { ThemeProvider } from '@/themes/ThemeContext'
 import { AlertProvider } from 'components/alerts/AlertContext'
-import { parseCookies } from '@/lib/cookies'
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 
@@ -40,7 +38,7 @@ export default function MyApp(props: MyAppProps) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider initialValue={cookies?.['theme-mode']}>
+      <ThemeProvider>
         <AlertProvider>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
@@ -49,16 +47,4 @@ export default function MyApp(props: MyAppProps) {
       </ThemeProvider>
     </CacheProvider>
   )
-}
-
-MyApp.getInitialProps = async (appContext: AppContext) => {
-  const req = appContext.ctx.req
-  const cookies = parseCookies(req)
-
-  const initialProps = await App.getInitialProps(appContext)
-
-  return {
-    ...initialProps,
-    cookies,
-  }
 }
