@@ -7,8 +7,8 @@ import {
 } from 'react'
 import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
-import lightTheme from '@/themes/light'
-import darkTheme from '@/themes/dark'
+import lightTheme from '@/themes/lightTheme'
+import darkTheme from '@/themes/darkTheme'
 import { useBroadcastChannel } from 'hooks/useBroadcastChannel'
 
 type ThemeMode = 'light' | 'dark'
