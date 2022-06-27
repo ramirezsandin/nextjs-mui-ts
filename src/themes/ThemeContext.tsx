@@ -12,7 +12,7 @@ import darkTheme from '@/themes/dark'
 import { useBroadcastChannel } from 'hooks/useBroadcastChannel'
 
 type ThemeMode = 'light' | 'dark'
-const DEFAULT_MODE: ThemeMode = 'light'
+const DEFAULT_THEME_MODE: ThemeMode = 'light'
 const DARK_SCHEME_QUERY = '(prefers-color-scheme: dark)'
 const THEME_MODE_VAR_NAME = 'themeMode'
 
@@ -28,7 +28,7 @@ interface ThemeProviderProps {
 }
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const systemPrefersDark = useMediaQuery(DARK_SCHEME_QUERY)
-  const [themeMode, setThemeMode] = useState<ThemeMode>(DEFAULT_MODE)
+  const [themeMode, setThemeMode] = useState<ThemeMode>(DEFAULT_THEME_MODE)
 
   const { postMessage } = useBroadcastChannel<ThemeMode>(
     'theme-mode-updater',
@@ -50,7 +50,7 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
     if (mode === 'dark' || mode === 'light') {
       setThemeMode(mode)
     } else {
-      setThemeMode(systemPrefersDark ? 'dark' : DEFAULT_MODE)
+      setThemeMode(systemPrefersDark ? 'dark' : DEFAULT_THEME_MODE)
     }
   }, [systemPrefersDark])
 
