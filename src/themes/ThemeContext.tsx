@@ -24,6 +24,7 @@ interface ThemeProviderProps {
   initialValue?: string
 }
 const ThemeProvider = ({ children, initialValue }: ThemeProviderProps) => {
+  console.log('initial value : ', initialValue)
   const systemPrefersDark = useMediaQuery(DARK_SCHEME_QUERY)
 
   const initialThemeMode: ThemeMode =
