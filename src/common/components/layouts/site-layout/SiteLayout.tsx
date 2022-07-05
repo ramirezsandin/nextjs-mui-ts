@@ -3,9 +3,6 @@ import Link from 'next/link'
 import { AppBar, Container, IconButton, Toolbar } from '@mui/material'
 import { Home } from '@mui/icons-material'
 
-import ThemeSwitcherButton from 'components/theme-switcher/ThemeSwitcherButton'
-import AlertContainer from 'components/alerts/AlertContainer'
-
 interface SiteLayoutProps {
   children?: ReactNode
 }

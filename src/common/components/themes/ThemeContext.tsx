@@ -1,3 +1,4 @@
+// External dependencies
 import {
   createContext,
   ReactNode,
@@ -7,9 +8,12 @@ import {
 } from 'react'
 import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
-import lightTheme from '@/themes/lightTheme'
-import darkTheme from '@/themes/darkTheme'
-import { useBroadcastChannel } from 'hooks/useBroadcastChannel'
+// Shared dependencies
+import { useBroadcastChannel } from '@/common/hooks'
+
+// Private dependencies
+import darkTheme from './dark.theme'
+import lightTheme from './light.theme'
 
 type ThemeMode = 'light' | 'dark'
 const DEFAULT_THEME_MODE: ThemeMode = 'light'

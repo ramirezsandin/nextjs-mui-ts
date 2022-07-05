@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import Head from 'next/head'
 import { Box, Typography } from '@mui/material'
 
-import SiteLayout from 'components/layouts/SiteLayout'
+import SiteLayout from 'common/components/layouts/site-layout/SiteLayout'
 
 const NotFound = () => {
   return (

@@ -1,9 +1,9 @@
 import { Alert, Slide, Snackbar } from '@mui/material'
 import { SyntheticEvent, useEffect, useState } from 'react'
 
-import { useAlertState } from 'components/alerts/AlertContext'
+import { useAlertState } from 'common/components/alerts/AlertContext'
 
-const AlertContainer = () => {
+export const AlertContainer = () => {
   const [open, setOpen] = useState<boolean>(false)
   const [key, setKey] = useState<number | undefined>(undefined)
   const { state, clearState } = useAlertState()
@@ -48,4 +48,3 @@ const AlertContainer = () => {
     </Snackbar>
   )
 }
-export default AlertContainer

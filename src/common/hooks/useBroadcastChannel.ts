@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 
-const useBroadcastChannel = <T>(
+export const useBroadcastChannel = <T>(
   name: string,
   handler: (message: T) => void
 ) => {
@@ -32,5 +32,3 @@ const useBroadcastChannel = <T>(
     postMessage,
   }
 }
-
-export { useBroadcastChannel }
