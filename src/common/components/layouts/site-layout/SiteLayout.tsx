@@ -1,15 +1,16 @@
+// External dependencies
 import { ReactNode } from 'react'
 import Link from 'next/link'
 import { AppBar, Container, IconButton, Toolbar } from '@mui/material'
 import { Home } from '@mui/icons-material'
 
-import ThemeSwitcherButton from 'components/theme-switcher/ThemeSwitcherButton'
-import AlertContainer from 'components/alerts/AlertContainer'
+// Shared dependencies
+import { ThemeSwitcherButton, AlertContainer } from '@/common/components'
 
 interface SiteLayoutProps {
   children?: ReactNode
 }
-const SiteLayout = ({ children }: SiteLayoutProps) => {
+export const SiteLayout = ({ children }: SiteLayoutProps) => {
   return (
     <>
       <AppBar position="static">
@@ -40,5 +41,3 @@ const SiteLayout = ({ children }: SiteLayoutProps) => {
     </>
   )
 }
-
-export default SiteLayout

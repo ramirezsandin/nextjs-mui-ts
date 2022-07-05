@@ -1,8 +1,10 @@
+// External dependencies
 import { ReactElement } from 'react'
 import Head from 'next/head'
 import { Box, Typography } from '@mui/material'
 
-import SiteLayout from 'components/layouts/SiteLayout'
+// Shared dependencies
+import { SiteLayout } from '@/common/components'
 
 const NotFound = () => {
   return (

@@ -2,31 +2,12 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/lib/*": [
-        "lib/*"
-      ],
-      "@/api/*": [
-        "pages/api/*"
-      ],
-      "@/pages/*": [
-        "pages/*"
-      ],
-      "@/react/*": [
-        "react/*"
-      ],
-      "@/themes/*": [
-        "themes/*"
-      ],
-      "@/messages/*": [
-        "../messages/*"
-      ]
+      "@/pages/*": ["pages/*"],
+      "@/api/*": ["pages/api/*"],
+      "@/*": ["*"]
     },
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -40,12 +21,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

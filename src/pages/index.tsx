@@ -1,8 +1,9 @@
+// External dependencies
 import { ReactElement } from 'react'
 import { Stack, Typography } from '@mui/material'
 
-import SiteLayout from 'components/layouts/SiteLayout'
-import AlertSender from 'components/alerts/AlertSender'
+// Shared dependencies
+import { AlertSender, SiteLayout } from '@/common/components'
 
 const IndexPage = () => {
   return (

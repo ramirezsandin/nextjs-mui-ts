@@ -1,9 +1,12 @@
-import { useThemeContext } from '@/themes/ThemeContext'
+// External dependencies
 import { DarkModeOutlined, LightModeRounded } from '@mui/icons-material'
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material'
 
+// Private dependencies
+import { useThemeContext } from './ThemeContext'
+
 interface ThemeSwitcherButtonProps extends IconButtonProps {}
-const ThemeSwitcherButton = ({ ...rest }: ThemeSwitcherButtonProps) => {
+export const ThemeSwitcherButton = ({ ...rest }: ThemeSwitcherButtonProps) => {
   const { themeMode, toggleTheme } = useThemeContext()
   return (
     <Tooltip
@@ -17,4 +20,3 @@ const ThemeSwitcherButton = ({ ...rest }: ThemeSwitcherButtonProps) => {
     </Tooltip>
   )
 }
-export default ThemeSwitcherButton

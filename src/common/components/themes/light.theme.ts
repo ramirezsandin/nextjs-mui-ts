@@ -1,6 +1,9 @@
+// External dependencies
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import { deepmerge } from '@mui/utils'
-import { baseTheme } from '@/themes/baseTheme'
+
+// Private dependencies
+import { baseTheme } from './base.theme'
 
 const lightTheme = responsiveFontSizes(
   createTheme(

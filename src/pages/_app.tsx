@@ -1,3 +1,4 @@
+// External dependencies
 import { ReactElement, ReactNode } from 'react'
 import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
@@ -6,9 +7,10 @@ import { CssBaseline } from '@mui/material'
 import { CacheProvider } from '@emotion/react'
 import { EmotionCache } from '@emotion/cache'
 
-import createEmotionCache from '@/lib/material-ui'
-import { ThemeProvider } from '@/themes/ThemeContext'
-import { AlertProvider } from 'components/alerts/AlertContext'
+// Shared dependencies
+import { createEmotionCache } from '@/common/utils'
+import { AlertProvider, ThemeProvider } from '@/common/components'
+
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 

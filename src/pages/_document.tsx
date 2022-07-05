@@ -1,7 +1,9 @@
+// External dependencies
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 
-import createEmotionCache from '@/lib/material-ui'
+// Shared dependencies
+import { createEmotionCache } from '@/common/utils'
 
 export default class MyDocument extends Document {
   render() {
