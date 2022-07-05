@@ -2,8 +2,12 @@
 import { SyntheticEvent, useEffect, useState } from 'react'
 import { Alert, Slide, Snackbar } from '@mui/material'
 
+<<<<<<< HEAD
 // Private dependencies
 import { useAlertState } from './AlertContext'
+=======
+import { useAlertState } from 'common/components/alerts/AlertContext'
+>>>>>>> baf0b28597c2d8138dc83d1fcb971c885091cba1
 
 export const AlertContainer = () => {
   const [open, setOpen] = useState<boolean>(false)

@@ -2,8 +2,13 @@
 import { ReactElement } from 'react'
 import { Stack, Typography } from '@mui/material'
 
+<<<<<<< HEAD
 // Shared dependencies
 import { AlertSender, SiteLayout } from '@/common/components'
+=======
+import SiteLayout from 'common/components/layouts/site-layout/SiteLayout'
+import AlertSender from 'common/components/alerts/AlertSender'
+>>>>>>> baf0b28597c2d8138dc83d1fcb971c885091cba1
 
 const IndexPage = () => {
   return (

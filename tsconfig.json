@@ -4,7 +4,11 @@
     "paths": {
       "@/pages/*": ["pages/*"],
       "@/api/*": ["pages/api/*"],
+<<<<<<< HEAD
       "@/*": ["*"]
+=======
+      "@/common/*": ["common/*"]
+>>>>>>> baf0b28597c2d8138dc83d1fcb971c885091cba1
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],

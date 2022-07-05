@@ -4,9 +4,12 @@ import Link from 'next/link'
 import { AppBar, Container, IconButton, Toolbar } from '@mui/material'
 import { Home } from '@mui/icons-material'
 
+<<<<<<< HEAD
 // Shared dependencies
 import { ThemeSwitcherButton, AlertContainer } from '@/common/components'
 
+=======
+>>>>>>> baf0b28597c2d8138dc83d1fcb971c885091cba1
 interface SiteLayoutProps {
   children?: ReactNode
 }

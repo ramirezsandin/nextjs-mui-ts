@@ -3,8 +3,12 @@ import { ReactElement } from 'react'
 import Head from 'next/head'
 import { Box, Typography } from '@mui/material'
 
+<<<<<<< HEAD
 // Shared dependencies
 import { SiteLayout } from '@/common/components'
+=======
+import SiteLayout from 'common/components/layouts/site-layout/SiteLayout'
+>>>>>>> baf0b28597c2d8138dc83d1fcb971c885091cba1
 
 const NotFound = () => {
   return (

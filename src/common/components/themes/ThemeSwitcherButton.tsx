@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // External dependencies
+=======
+import { useThemeContext } from 'common/components/themes/ThemeContext'
+>>>>>>> baf0b28597c2d8138dc83d1fcb971c885091cba1
 import { DarkModeOutlined, LightModeRounded } from '@mui/icons-material'
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material'
 
