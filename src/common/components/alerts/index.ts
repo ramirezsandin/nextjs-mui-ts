@@ -1,3 +1,3 @@
 export * from './AlertContainer'
-export * from './AlertContext'
+export * from './AlertProvider'
 export * from './AlertSender'

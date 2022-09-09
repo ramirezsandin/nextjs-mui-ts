@@ -3,26 +3,31 @@ import { SyntheticEvent, useEffect, useState } from 'react'
 import { Alert, Slide, Snackbar } from '@mui/material'
 
 // Private dependencies
-import { useAlertState } from './AlertContext'
+import { useAlertState } from './AlertProvider'
+
+interface AlertContainerState {
+  open: boolean
+  key?: number
+}
 
 export const AlertContainer = () => {
-  const [open, setOpen] = useState<boolean>(false)
-  const [key, setKey] = useState<number | undefined>(undefined)
-  const { state, clearState } = useAlertState()
+  const [{ open, key }, setState] = useState<AlertContainerState>({
+    open: false,
+  })
+  const { message, type, clear } = useAlertState()
 
   useEffect(() => {
-    if (!!state) {
-      // key trick to make the component rerender.
-      setKey(new Date().getTime())
-      setOpen(true)
+    if (!!message) {
+      // Trick: set key to timestamp to make the component rerender next time.
+      setState({ open: true, key: new Date().getTime() })
     }
-  }, [state])
+  }, [message])
 
   const handleClose = (_: Event | SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return
     }
-    setOpen(false)
+    setState((prev) => ({ ...prev, open: false }))
   }
   return (
     <Snackbar
@@ -33,19 +38,19 @@ export const AlertContainer = () => {
       anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
       TransitionComponent={Slide}
       TransitionProps={{
-        onExited: clearState,
+        onExited: clear,
       }}
     >
       <Alert
         onClose={handleClose}
-        severity={state?.type}
+        severity={type}
         variant="filled"
         elevation={4}
         sx={{
           width: { xs: '80vw', sm: '70vw', md: '60vw', lg: '50vw', xl: '35vw' },
         }}
       >
-        {state?.message}
+        {message}
       </Alert>
     </Snackbar>
   )

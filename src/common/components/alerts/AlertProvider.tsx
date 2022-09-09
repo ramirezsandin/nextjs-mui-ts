@@ -12,8 +12,8 @@ import { AlertColor } from '@mui/material'
 
 // The State of the whole context.
 interface AlertState {
-  type: AlertColor
   message: string
+  type: AlertColor
 }
 
 // Alert Caller Context Type.
@@ -30,11 +30,11 @@ const AlertCallerContext = createContext<AlertCallerContextType>(
 const useAlertCaller = () => useContext(AlertCallerContext)
 
 // Alert Caller Provider
-interface AlertUpdateProviderProps {
+interface AlertCallerProviderProps {
   children: ReactNode
   setState: (newState: AlertState) => void
 }
-const AlertCallerProvider = memo<AlertUpdateProviderProps>(
+const AlertCallerProvider = memo<AlertCallerProviderProps>(
   ({ children, setState }) => {
     return (
       <AlertCallerContext.Provider
@@ -50,31 +50,33 @@ const AlertCallerProvider = memo<AlertUpdateProviderProps>(
 AlertCallerProvider.displayName = 'AlertUpdateProvider'
 
 // Alert State Context Type
-interface AlertStateContextType {
-  state: AlertState | undefined
-  clearState: () => void
+interface AlertContextType {
+  type?: AlertColor
+  message?: string
+  clear: () => void
 }
 
 // Alert State Context
-const AlertStateContext = createContext<AlertStateContextType>(
-  {} as AlertStateContextType
-)
+const AlertContext = createContext<AlertContextType>({} as AlertContextType)
 
 // Alert State Hook: To be used in the Alert Container
-const useAlertState = () => useContext(AlertStateContext)
+const useAlertState = () => useContext(AlertContext)
 
 // Alert Provider: The component that will render the alert. To be placed somewhere in the layout.
 interface AlertProviderProps {
   children: ReactNode
 }
 const AlertProvider = ({ children }: AlertProviderProps) => {
-  const [state, setState] = useState<AlertState | undefined>(undefined)
+  const [state, setState] = useState<AlertState | null>(null)
   return (
-    <AlertStateContext.Provider
-      value={{ state, clearState: () => setState(undefined) }}
+    <AlertContext.Provider
+      value={{
+        ...state,
+        clear: () => setState(null),
+      }}
     >
       <AlertCallerProvider setState={setState}>{children}</AlertCallerProvider>
-    </AlertStateContext.Provider>
+    </AlertContext.Provider>
   )
 }
 
